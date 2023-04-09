@@ -32,13 +32,24 @@ const data = Array.from({length: 500}, (_, i) => ({
 }));
 
 function App() {
-  return (
-    <FlatList
-      ItemSeparatorComponent={() => <View style={{height: 2}}></View>}
-      data={data}
-      renderItem={({item}) => <Text>{item.text}</Text>}
-    />
-  );
+  const renderItem = ({item}: {item: (typeof data)[0]}) => {
+    console.info('rendering FlatList item', item.id, new Date());
+    return <MyComponent text={item.text} id={item.id} />;
+  };
+
+  return <FlatList data={data} renderItem={renderItem} />;
 }
+
+const MyComponent = React.memo(function MyComponent(props: {
+  text: string;
+  id: number;
+}) {
+  console.info('rendering MyComponent', props.id, new Date());
+  return (
+    <View>
+      <Text>{props.text}</Text>
+    </View>
+  );
+});
 
 export default App;
