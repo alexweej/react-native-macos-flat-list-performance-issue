@@ -26,7 +26,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const data = Array.from({length: 500}, (_, i) => ({
+const data = Array.from({length: 1000}, (_, i) => ({
   id: i,
   text: `This is another item with index ${i}`,
 }));
@@ -36,6 +36,8 @@ type Item = (typeof data)[0];
 const ITEM_HEIGHT = 20;
 
 function App() {
+  console.info('rendering App');
+
   const renderItem = ({item}: {item: Item}) => {
     console.info('rendering FlatList item', item.id, new Date());
     return <MyComponent text={item.text} id={item.id} />;
